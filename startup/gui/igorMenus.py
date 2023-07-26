@@ -57,7 +57,7 @@ def __setColor(node, state):
 
 
 def __appendNodeMenu(graphEditor, node, menuDefinition):
-    menuDefinition.append("/IgorDivider", {"divider": True})
+    menuDefinition.append("/IgorDivider", {"divider": True, "label": "Igor : Color"})
     menuDefinition.append("/Neutral", {"command": functools.partial(__setColor, node, "Neutral")})
     menuDefinition.append("/Warning", {"command": functools.partial(__setColor, node, "Warning")})
     menuDefinition.append("/Error", {"command": functools.partial(__setColor, node, "Error")})
