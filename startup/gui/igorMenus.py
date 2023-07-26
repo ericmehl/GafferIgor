@@ -49,13 +49,19 @@ def __setColor(node, state):
     elif state == "Error":
         Gaffer.Metadata.deregisterValue(node, "nodeGadget:color")
         Gaffer.Metadata.registerValue(node, "nodeGadget:color", imath.Color3f(0.75, 0.0, 0.0))
+    elif state == "Passing":
+        Gaffer.Metadata.deregisterValue(node, "nodeGadget:color")
+        Gaffer.Metadata.registerValue(node, "nodeGadget:color", imath.Color3f(0.015, 0.75, 0.0))
     elif state == "Neutral":
         Gaffer.Metadata.deregisterValue(node, "nodeGadget:color")
+
+
 def __appendNodeMenu(graphEditor, node, menuDefinition):
     menuDefinition.append("/IgorDivider", {"divider": True})
     menuDefinition.append("/Neutral", {"command": functools.partial(__setColor, node, "Neutral")})
     menuDefinition.append("/Warning", {"command": functools.partial(__setColor, node, "Warning")})
     menuDefinition.append("/Error", {"command": functools.partial(__setColor, node, "Error")})
+    menuDefinition.append("/Passing", {"command": functools.partial(__setColor, node, "Passing")})
 
 
 GafferUI.GraphEditor.nodeContextMenuSignal().connect(__appendNodeMenu, scoped=False)
